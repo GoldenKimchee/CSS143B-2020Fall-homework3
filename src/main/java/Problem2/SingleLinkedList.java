@@ -14,6 +14,7 @@ public class SingleLinkedList {
     public SingleLinkedList(SingleLinkedList list) {
         //if list empty
         ListNode node = list.head;
+        head = new ListNode();
         ListNode myNode = head;
         int value;
         while (node.next != null) {

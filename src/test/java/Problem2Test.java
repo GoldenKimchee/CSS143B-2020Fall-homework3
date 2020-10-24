@@ -10,12 +10,14 @@ public class Problem2Test {
     @Test
     public void testCopyConstructor() {
         // single node
-        for (int i = 0; i < 5; i++) {
+        for (int i = 2; i < 5; i++) {
             SingleLinkedList theirList = new SingleLinkedList();
             for (int j = 0; j < i; j++) {
                 theirList.add(i);
             }
             SingleLinkedList myList = new SingleLinkedList(theirList);
+            System.out.println(theirList);
+            System.out.println(myList);
             assertEquals(theirList, myList);
 
             // change the list being copied to verify copy constructor
