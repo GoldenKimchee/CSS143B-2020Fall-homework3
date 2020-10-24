@@ -12,7 +12,20 @@ public class SingleLinkedList {
 
     // copy constructor
     public SingleLinkedList(SingleLinkedList list) {
-        // homework
+        //if list empty
+        ListNode node = list.head;
+        ListNode myNode = head;
+        int value;
+        while (node.next != null) {
+            value = node.next.val;  //stores value of the list's next nodes value
+            myNode.next = new ListNode(value); //create node with that value in my list to create
+            node = node.next; // move onto next node of the list we want to copy
+            myNode = myNode.next; // move onto next node of my list
+        }
+        if (node.next == null) {
+            myNode.next = null; // if null, set next to point to null (end of list)
+        }
+
     }
 
     public int removeAll(int valueToRemove) {
