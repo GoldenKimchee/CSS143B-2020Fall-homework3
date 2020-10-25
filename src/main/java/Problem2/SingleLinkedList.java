@@ -1,5 +1,7 @@
 package Problem2;
 
+import java.util.List;
+
 // all functions assume using dummy node
 public class SingleLinkedList {
     // do not add member variables
@@ -12,34 +14,64 @@ public class SingleLinkedList {
 
     // copy constructor
     public SingleLinkedList(SingleLinkedList list) {
-        //if list empty
-        ListNode node = list.head;
-        head = new ListNode();
-        ListNode myNode = head;
-        int value;
-        while (node.next != null) {
-            value = node.next.val;  //stores value of the list's next nodes value
-            myNode.next = new ListNode(value); //create node with that value in my list to create
-            node = node.next; // move onto next node of the list we want to copy
-            myNode = myNode.next; // move onto next node of my list
-        }
-        if (node.next == null) {
-            myNode.next = null; // if null, set next to point to null (end of list)
+        //followed instructor's code. if you would like to see my original solution,
+        //please check the first commit! (changed it because this looks less messy)
+        if (list == null) {
+            return;
         }
 
+        //create dummy node
+        ListNode p1 = new ListNode();
+        head = p1;
+
+        //use pointer to point to first read node of the list
+        ListNode p2 = list.head.next;
+
+        while (p2 != null) {
+            p1.next = new ListNode(p2.val);
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        size = list.size;
     }
 
     public int removeAll(int valueToRemove) {
-        // homework
-        // in-place
-        return -1; // place holder
+        if (head == null) {
+            return 0;
+        }
+        while (head.val == valueToRemove) { //if head or first values are value to remove
+            head = head.next;
+        }
+        int removed = 0;
+        ListNode current = head;
+        while (current.next != null) {      //check rest of the list
+            if (current.next.val == valueToRemove) {    //if matches, then
+                current.next = current.next.next;   //set next to skip over a node
+                size--;
+                removed++;
+            } else {
+                current = current.next;
+            }
+        }
+        return removed;
     }
 
     // reverse the linked list nodes iteratively (no recursion)
     public void reverse() {
-        // homework
-        // in-place
+        ListNode prev = null; //store address of previous node
+        ListNode current = head; //store address of next node
+        ListNode next; //store address of next node
+        while (current != null) {
+            next = current.next; //store .next reference
+            current.next = prev; //point .next to previous node
+            prev = current; //move over one
+            current = next; //moveq  over one
+        }
+        head = prev;
     }
+    //inputed: {3, 4, 5, 6, 7}
+    //expected: 7 -> 6 -> 5 -> 4 -> 3 -> end
+    //actual:   6 -> 5 -> 4 -> 3 -> 0 -> end
 
     // do not change any function below
 
