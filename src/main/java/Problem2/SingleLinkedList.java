@@ -1,7 +1,5 @@
 package Problem2;
 
-import java.util.List;
-
 // all functions assume using dummy node
 public class SingleLinkedList {
     // do not add member variables
@@ -58,22 +56,17 @@ public class SingleLinkedList {
 
     // reverse the linked list nodes iteratively (no recursion)
     public void reverse() {
-        ListNode prev = null; //store address of previous node
-        ListNode current = head; //store address of next node
-        ListNode next; //store address of next node
-        while (current != null) {
-            next = current.next; //store .next reference
-            current.next = prev; //point .next to previous node
-            prev = current; //move over one
-            current = next; //moveq  over one
+        if (size > 1) { //thank you so much to prof peng du for helping me on this question!!
+            ListNode p1 = head.next;
+            ListNode p2 = head.next.next;
+            while (p2 != null) {
+                p1.next = p2.next; //set the pointer to point at the next value BEFORE I delete it!!
+                p2.next = head.next; //now is not referencing null, but the value that head.next points to
+                head.next = p2;
+                p2 = p1.next;
+            }
         }
-        head = prev;
     }
-    //inputed: {3, 4, 5, 6, 7}
-    //expected: 7 -> 6 -> 5 -> 4 -> 3 -> end
-    //actual:   6 -> 5 -> 4 -> 3 -> 0 -> end
-
-    // do not change any function below
 
     public SingleLinkedList(int[] data) {
         this();
