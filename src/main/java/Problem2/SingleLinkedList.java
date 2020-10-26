@@ -12,22 +12,61 @@ public class SingleLinkedList {
 
     // copy constructor
     public SingleLinkedList(SingleLinkedList list) {
-        // homework
+        //followed instructor's code. if you would like to see my original solution,
+        //please check the first commit! (changed it because this looks less messy)
+        if (list == null) {
+            return;
+        }
+
+        //create dummy node
+        ListNode p1 = new ListNode();
+        head = p1;
+
+        //use pointer to point to first read node of the list
+        ListNode p2 = list.head.next;
+
+        while (p2 != null) {
+            p1.next = new ListNode(p2.val);
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        size = list.size;
     }
 
     public int removeAll(int valueToRemove) {
-        // homework
-        // in-place
-        return -1; // place holder
+        if (head == null) {
+            return 0;
+        }
+        while (head.val == valueToRemove) { //if head or first values are value to remove
+            head = head.next;
+        }
+        int removed = 0;
+        ListNode current = head;
+        while (current.next != null) {      //check rest of the list
+            if (current.next.val == valueToRemove) {    //if matches, then
+                current.next = current.next.next;   //set next to skip over a node
+                size--;
+                removed++;
+            } else {
+                current = current.next;
+            }
+        }
+        return removed;
     }
 
     // reverse the linked list nodes iteratively (no recursion)
     public void reverse() {
-        // homework
-        // in-place
+        if (size > 1) { //thank you so much to prof peng du for helping me on this question!!
+            ListNode p1 = head.next;
+            ListNode p2 = head.next.next;
+            while (p2 != null) {
+                p1.next = p2.next; //set the pointer to point at the next value BEFORE I delete it!!
+                p2.next = head.next; //now is not referencing null, but the value that head.next points to
+                head.next = p2;
+                p2 = p1.next;
+            }
+        }
     }
-
-    // do not change any function below
 
     public SingleLinkedList(int[] data) {
         this();
