@@ -4,7 +4,7 @@ import Problem1.LinkedListStack;
 import Problem2.ListNode;
 
 import java.io.PrintStream;
-//Should work??
+
 public class Problem3 {
     public static void printListInReverse(ListNode list, PrintStream print) {
         LinkedListStack<Integer> stack = new LinkedListStack<>();
@@ -14,7 +14,7 @@ public class Problem3 {
             list = list.next;
         }
         while (stack.size() > 0) {
-            print.print(stack.pop());
+            print.println(stack.pop());
         }
     }
 }
